@@ -5,10 +5,13 @@
  * Use this template to get started creating a simple 2D game for the web using P5.js. 
  */
 var gameState = "splash";
+var Player1;
 
 function setup() {
 
   createCanvas(600, 400);
+  Player1 = new Player(width/2, height * 4/5);
+  console.log(Player1);
 
 }
 
@@ -50,8 +53,9 @@ function play() {
   fill(0, 0, 200)
   textAlign(CENTER);
   textSize(16);
-  text("This is where the Game happens", width / 2, height / 2);
-
+  //text("This is where the Game happens", width / 2, height / 2);
+ // Player1.x = mouseX; //controls movement where it follows the mouse 
+  Player1.display();
 }
 
 function gameOver() {
@@ -69,11 +73,49 @@ function mousePressed() {
   if(gameState == "splash"){
     gameState = "play";
     } else if(gameState == "play"){
-      gameState = "gameOver";
+      //gameState = "gameOver"; when mouse is pressed wont go to gameOver screen 
     } else if(gameState == "gameOver"){
       gameState = "splash";
     }
     console.log(gameState);
   
-  
+}
+
+function keyPressed() {
+  switch(keyCode) {
+    case UP_ARROW :
+      console.log("up");
+      Player1.y -= 30 // move up 30px
+    Player1.angle = 0; // no rotation
+    if(Player1.y < 0) {
+      Player1.y = height;
+    } // wrap to bottom
+      break;
+    case DOWN_ARROW :
+      console.log("down");
+      Player1.y += 30 // move down 30px
+    Player1.angle = PI ; // point down (rotate 180 deg.)
+    if(Player1.y > height) {
+      Player1.y = 0; // wrap to top
+    }
+      break;
+    case LEFT_ARROW :
+      console.log("left");
+      Player1.x -=30;
+      Player1.angle = PI + HALF_PI;
+      if(Player1.x < 0){
+        Player1.x = width;
+      }
+      break;
+    case RIGHT_ARROW :
+      console.log("right");
+      Player1.x += 30;
+      Player1.angle = HALF_PI;
+      if(Player1.x > width){
+        Player1.x = 0;
+      }
+      break;
+    default : // do this if the key doesn't match the list ...
+      console.log("press the arrow keys to move player1");
+  }
 }
