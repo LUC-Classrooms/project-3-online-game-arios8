@@ -6,12 +6,15 @@
  */
 var gameState = "splash";
 var Player1;
+var gameTimer; //time the gameplay
 
 function setup() {
 
   createCanvas(600, 400);
   Player1 = new Player(width/2, height * 4/5);
   console.log(Player1);
+ 
+  gameTimer = new Timer(5000); // 2 second timer
 
 }
 
@@ -56,6 +59,11 @@ function play() {
   //text("This is where the Game happens", width / 2, height / 2);
  // Player1.x = mouseX; //controls movement where it follows the mouse 
   Player1.display();
+  if(gameTimer.isFinished()){
+    gameState = "gameOver";
+  }
+  textAlign(LEFT);
+  text("elapsed time: " + gameTimer.elapsedTime, 40, 100);
 }
 
 function gameOver() {
@@ -72,17 +80,20 @@ function mousePressed() {
   console.log("click!");
   if(gameState == "splash"){
     gameState = "play";
+    gameTimer.start(); //start the timer
     } else if(gameState == "play"){
       //gameState = "gameOver"; when mouse is pressed wont go to gameOver screen 
     } else if(gameState == "gameOver"){
       gameState = "splash";
     }
     console.log(gameState);
+
+  
   
 }
 
 function keyPressed() {
-  switch(keyCode) {
+  switch(keyCode) { //replace with "let foo" new line "switch (foo){" to disable
     case UP_ARROW :
       console.log("up");
       Player1.y -= 30 // move up 30px
