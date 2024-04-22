@@ -18,8 +18,8 @@ function setup() {
   Player1 = new Player(width/2, height * 4/5);
   console.log(Player1);
  
-  gameTimer = new Timer(5000); // 2 second timer
-  dropTimer = new Timer(500);
+  gameTimer = new Timer(30000); // 30 second timer
+  dropTimer = new Timer(1000); //drop every second
   testBox = new Box(width/2, height/3);
   
 
@@ -89,11 +89,11 @@ function play() {
     
     }else if(presents[i].y > height){ //present went below canvas
       presents.splice(i, 1); // remove 1 element from from "presents" at index 'i'
-      score --;
+      score--;
     }
   }
   textAlign(LEFT);
-  text("elapsed time: " + gameTimer.elapsedTime, 40, 100);
+  text("Time Remaining: " + (gameTimer.time - Math.trunc(gameTimer.elapsedTime))/1000, 40, 100);
   text("Score: " + score, 20, 40);
 
 
