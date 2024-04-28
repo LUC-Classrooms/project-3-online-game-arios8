@@ -182,4 +182,4 @@ function keyPressed() {
     default : // do this if the key doesn't match the list ...
       console.log("press the arrow keys to move player1");
   }
-}
+}//project completed 
