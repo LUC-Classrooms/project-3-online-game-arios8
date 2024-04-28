@@ -49,11 +49,13 @@ function draw() {
 
 function splash() {
   // this is what you would see when the game starts
-  background(200);
+  background(255, 242, 224);
   textAlign(CENTER);
   textSize(16);
-  text("Let's Play a Game!", width / 2, height / 2);
+  textFont("Impact");
+  text("Can you Collect The Presents?", width / 2, height / 2);
   textSize(12);
+  textFont("Helvetica");
   text("(click the mouse to continue)", width / 2, height / 2 + 30);
 
   testBox.display();
@@ -62,7 +64,7 @@ function splash() {
 
 function play() {
   // this is what you see when the game is running 
-  background(0, 200, 0);
+  background(255, 242, 224);
   fill(0, 0, 200)
   textAlign(CENTER);
   textSize(16);
@@ -102,10 +104,22 @@ function play() {
 function gameOver() {
   // this is what you see when the game ends
   background(0);
-  fill(255, 0, 0)
+  fill(255, 255, 255)
   textAlign(CENTER);
+  textFont("Impact");
   textSize(16);
-  text("Game Over!", width / 2, height / 2);
+  text("GAME OVER!", width / 2, height / 2);
+  textFont("Helvetica");
+  //text ("Your Final Score: " + score, width/2, height*2/3);
+
+  if (score > 5){
+    fill(5, 242, 68);
+    text("You Caught Enough Presents!!", 300,300);
+  } else if (score < 5){
+    fill(255,0,0)
+    text("Not Enough Presents Were Caught :( ", 300,300);
+  }
+  fill(255,255,255)
   text ("Your Final Score: " + score, width/2, height*2/3);
 }
 
